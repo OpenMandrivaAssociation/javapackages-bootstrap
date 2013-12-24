@@ -611,7 +611,7 @@ Requires:	javapackages-bootstrap = $javapackages_bootstrap_version
     }
     my $obs = `rpm -qp --obsoletes $rpm | egrep -v '(rpmlib)' | sort -u`;
     foreach (split('\n', $obs)) {
-	print("obsoletes:	$_\n");
+	print("Obsoletes:	$_\n");
     }
 print("
 %description	-n $name
