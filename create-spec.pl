@@ -548,6 +548,7 @@ foreach my $rpm (glob("*.rpm")) {
 }
 
 print("
+<<<cause rebuild failure on purpose to not overwrite bootstraped packages>>>
 %undefine _compress
 %undefine _extension
 %global _duplicate_files_terminate_build 0
