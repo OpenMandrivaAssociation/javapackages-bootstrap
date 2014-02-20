@@ -40,7 +40,7 @@ print("
 URL:		https://abf.rosalinux.ru/openmandriva/$name
 BuildArch:	noarch
 Summary:	$name bootstrap version
-Requires:	javapackages-bootstrap
+#Requires:	javapackages-bootstrap
 ");
 my $req = `rpm -qp --requires $rpm | egrep -v '(rpmlib)' | sort -u`;
 foreach (split('\n', $req)) {
@@ -79,7 +79,7 @@ Epoch:		$epoch");
 Version:	$version
 Release:	$release
 Summary:	$name bootstrap version
-Requires:	javapackages-bootstrap
+#Requires:	javapackages-bootstrap
 ");
     my $req = `rpm -qp --requires $extra | egrep -v '(rpmlib)' | sort -u`;
     foreach (split('\n', $req)) {
