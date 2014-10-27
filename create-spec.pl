@@ -562,6 +562,7 @@ Name:		javapackages-bootstrap
 Version:	$javapackages_bootstrap_version
 Release:	$javapackages_bootstrap_release
 Summary:	javapackages-bootstrap packages
+Group:		Development/Java
 License:	GPLv3+
 URL:		https://abf.rosalinux.ru/openmandriva/javapackages-bootstrap
 BuildArch:	noarch
@@ -600,6 +601,7 @@ Epoch:		$epoch");
 Version:	$version
 Release:	$release
 Summary:	$name bootstrap version
+Group:		Development/Java
 Requires:	javapackages-bootstrap = $javapackages_bootstrap_version
 ");
     my $req = `rpm -qp --requires $rpm | egrep -v '(rpmlib)' | sort -u`;
