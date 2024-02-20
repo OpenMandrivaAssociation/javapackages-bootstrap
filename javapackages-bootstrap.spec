@@ -170,6 +170,7 @@ BuildRequires:  jdk-current
 BuildRequires:  jurand
 BuildRequires:  rpm-devel
 BuildRequires:  rpm-local-generator-support
+BuildRequires:	javapackages-filesystem
 
 Requires:       bash
 Requires:       coreutils
