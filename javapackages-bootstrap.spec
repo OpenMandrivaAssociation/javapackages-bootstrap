@@ -204,7 +204,7 @@ sed -i -e 's,/usr/lib/jvm/java-21,%{javaHomePath},g' mbi/core/src/org/fedoraproj
 %endif
 
 # Dynamically generate bundled Provides
-%{SOURCE2} >bundled-provides.txt
+sh %{SOURCE2} >bundled-provides.txt
 
 # leave out the first source as it has already been extracted
 # leave out licensing breakdown file
