@@ -39,7 +39,6 @@ sources:
   jansi.tar.xz: d56ee485bbec5b673ad9db61ccd7bec6a708a234
   javacc-maven-plugin.tar.xz: 343b96dd7985b034ee33b778b7093e6bf8b6b8a4
   javacc.tar.xz: 64c8f767188dd17c7a501c9d7b290b0abdc251ee
-  javapackages-bootstrap-1.16.0.tar.xz: fb6073bbe45d3c60f724c6d6cb64e864036e41dc
   javaparser.tar.xz: ea7dfe39a19a8a5a5c2f00b767971ded9c9fd360
   jcommander.tar.xz: 1f2bfeb357ad5f23d4f089e5d000d94ab402f368
   jctools.tar.xz: 09b20ed81f1578d107098395dbbf14fcde9b5d46
@@ -120,3 +119,4 @@ sources:
   xmvn-generator.tar.xz: 028b4651eb075d241222cfc9a55684ad2487abad
   xmvn.tar.xz: 213d368c6ada0ec0a3a4b2e0e19afabfd4652478
   xz-java.tar.xz: 367477ea5e39a444c4b539bb91f10d25fb906a37
+  javapackages-bootstrap-1.17.0.tar.xz: f08e4486099a01e3896d14a1b3b7be6d6141cbe9
