@@ -12,7 +12,7 @@
 
 %global         debug_package %{nil}
 
-%global javaHomePath %{_jvmdir}/java-21-openjdk
+%global javaHomePath %(. %{_sysconfdir}/profile.d/90java.sh ; echo -n $JAVA_HOME)
 %global mavenHomePath %{_datadir}/%{name}
 %global metadataPath %{mavenHomePath}/maven-metadata
 %global artifactsPath %{_jnidir}
@@ -170,7 +170,7 @@ BuildRequires:  jdk-current
 BuildRequires:  jurand
 BuildRequires:  rpm-devel
 BuildRequires:  rpm-local-generator-support
-BuildRequires:	javapackages-filesystem
+BuildRequires:  javapackages-filesystem
 
 Requires:       bash
 Requires:       coreutils
