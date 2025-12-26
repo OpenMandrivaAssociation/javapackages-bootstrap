@@ -1,6 +1,25 @@
 #!/bin/sh
 set -eu
 
+normalize_version() {
+    v="$1"
+
+    # If it contains a hyphen, split into base + qualifier
+    if echo "$v" | grep -q '-'; then
+        base="${v%%-*}"
+        rest="${v#*-}"
+
+        # Remove remaining hyphens inside qualifier
+        rest="${rest//-/}"
+
+        # OpenMandriva style: base-0.qualifier.1
+        echo "${base}-0.${rest}.1"
+    else
+        # No qualifier, version is fine
+        echo "$v"
+    fi
+}
+
 for f in project/*.properties; do
     b=${f##*/}
     p=${b%%.properties}
@@ -41,5 +60,6 @@ s/^velocity-engine /velocity /
 p
 ' | while read fp mp; do
     . $mp
-    echo "bundled($fp) = $version"
+    norm=$(normalize_version "$version")
+    echo "bundled($fp) = $norm"
 done
