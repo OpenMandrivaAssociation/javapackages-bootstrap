@@ -1,184 +1,179 @@
 # Exclude automatically generated requires on java interpreter which is not
 # owned by any package
-%global         __requires_exclude ^%{_jvmdir}/java
-
-# Don't run OSGi dependency generators on private (bundled) JARs
-%global         __requires_exclude_from \\.jar$
-%global         __provides_exclude_from \\.jar$
-
+%global __requires_exclude ^%{_jvmdir}/jre
 # Generated list of bundled packages
-%global         __local_generator_provides cat %{_builddir}/%{buildsubdir}/bundled-provides.txt
-%global         __local_generator_path ^%{metadataPath}/.*$
-
-%global         debug_package %{nil}
-
+%global _local_file_attrs local_generator
+%global __local_generator_provides cat %{_builddir}/%{buildsubdir}/bundled-provides.txt
+%global __local_generator_path ^%{metadataPath}/.*$
+%global debug_package %{nil}
 %global javaHomePath %(. %{_sysconfdir}/profile.d/90java.sh ; echo -n $JAVA_HOME)
 %global mavenHomePath %{_datadir}/%{name}
 %global metadataPath %{mavenHomePath}/maven-metadata
-%global artifactsPath %{_jnidir}
+%global artifactsPath %{_datadir}
 %global launchersPath %{_libexecdir}/%{name}
 
-#global git_hash ...
-#global git_short_hash %(echo %{git_hash} | cut -b -7)
-
 Name:           javapackages-bootstrap
-Version:        1.17.0
+Version:        1.27.0
 Release:        1
 Summary:        A means of bootstrapping Java Packages Tools
 # For detailed info see the file javapackages-bootstrap-PACKAGE-LICENSING
-License:        Apache-1.1 AND Apache-2.0 AND (Apache-2.0 OR EPL-2.0) AND (Apache-2.0 OR LGPL-2.0-or-later) AND BSD-2-Clause AND BSD-3-Clause AND CC-BY-2.5 AND CC0-1.0 AND CPL-1.0 AND EPL-1.0 AND EPL-2.0 AND (EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0) AND LicenseRef-Fedora-Public-Domain AND MIT AND Plexus AND SMLNJ AND Saxpath AND xpp
+License:        Apache-1.1 AND Apache-2.0 AND (Apache-2.0 OR EPL-2.0) AND (Apache-2.0 OR LGPL-2.0-or-later) AND BSD-2-Clause AND BSD-3-Clause AND CC0-1.0 AND CPL-1.0 AND EPL-1.0 AND EPL-2.0 AND (EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0) AND LicenseRef-Fedora-Public-Domain AND MIT AND Plexus AND SMLNJ AND Saxpath AND xpp
 URL:            https://github.com/fedora-java/javapackages-bootstrap
+BuildArch:      noarch
 
-Source0:        https://github.com/fedora-java/javapackages-bootstrap/releases/download/%{version}/javapackages-bootstrap-%{version}.tar.xz
-#Source0:        https://github.com/fedora-java/javapackages-bootstrap/archive/%{git_short_hash}.tar.gz
-
+Source0:        https://github.com/fedora-java/javapackages-bootstrap/releases/download/%{version}/javapackages-bootstrap-%{version}.tar.zst
 # License breakdown
 Source1:        javapackages-bootstrap-PACKAGE-LICENSING
-Source2:        generate-bundled-provides.sh
-
 # To obtain the following sources:
-# tar -xf ${name}-${version}.tar.xz
+# tar -xf ${name}-${version}.tar.zst
 # pushd ${name}-${version}
 # ./downstream.sh clone
 # ./downstream.sh prep
 # ./downstream.sh archive
 # The results are in the archive directory
-Source1001:     ant.tar.xz
-Source1002:     aopalliance.tar.xz
-Source1003:     apache-pom.tar.xz
-Source1004:     apiguardian.tar.xz
-Source1005:     asm.tar.xz
-Source1006:     assertj-core.tar.xz
-Source1007:     bnd.tar.xz
-Source1008:     build-helper-maven-plugin.tar.xz
-Source1009:     byte-buddy.tar.xz
-Source1010:     cdi.tar.xz
-Source1011:     cglib.tar.xz
-Source1012:     common-annotations-api.tar.xz
-Source1013:     commons-beanutils.tar.xz
-Source1014:     commons-cli.tar.xz
-Source1015:     commons-codec.tar.xz
-Source1016:     commons-collections.tar.xz
-Source1017:     commons-compress.tar.xz
-Source1018:     commons-io.tar.xz
-Source1019:     commons-jxpath.tar.xz
-Source1020:     commons-lang.tar.xz
-Source1021:     commons-logging.tar.xz
-Source1022:     commons-parent-pom.tar.xz
-Source1023:     cup.tar.xz
-Source1024:     disruptor.tar.xz
-Source1025:     easymock.tar.xz
-Source1026:     extra-enforcer-rules.tar.xz
-Source1027:     felix-parent-pom.tar.xz
-Source1028:     felix-utils.tar.xz
-Source1029:     fusesource-pom.tar.xz
-Source1030:     guava.tar.xz
-Source1031:     guice.tar.xz
-Source1032:     hamcrest.tar.xz
-Source1033:     httpcomponents-client.tar.xz
-Source1034:     httpcomponents-core.tar.xz
-Source1035:     httpcomponents-parent-pom.tar.xz
-Source1036:     injection-api.tar.xz
-Source1037:     jaf-api.tar.xz
-Source1038:     jansi.tar.xz
-Source1039:     javacc-maven-plugin.tar.xz
-Source1040:     javacc.tar.xz
-Source1041:     javaparser.tar.xz
-Source1042:     jcommander.tar.xz
-Source1043:     jctools.tar.xz
-Source1044:     jdom.tar.xz
-Source1045:     jdom2.tar.xz
-Source1046:     jflex.tar.xz
-Source1047:     jsoup.tar.xz
-Source1048:     jsr-305.tar.xz
-Source1049:     junit4.tar.xz
-Source1050:     junit5.tar.xz
-Source1051:     log4j.tar.xz
-Source1052:     mail-api.tar.xz
-Source1053:     maven-antrun-plugin.tar.xz
-Source1054:     maven-apache-resources.tar.xz
-Source1055:     maven-archiver.tar.xz
-Source1056:     maven-artifact-transfer.tar.xz
-Source1057:     maven-assembly-plugin.tar.xz
-Source1058:     maven-bundle-plugin.tar.xz
-Source1059:     maven-common-artifact-filters.tar.xz
-Source1060:     maven-compiler-plugin.tar.xz
-Source1061:     maven-dependency-analyzer.tar.xz
-Source1062:     maven-dependency-plugin.tar.xz
-Source1063:     maven-dependency-tree.tar.xz
-Source1064:     maven-enforcer.tar.xz
-Source1065:     maven-file-management.tar.xz
-Source1066:     maven-filtering.tar.xz
-Source1067:     maven-jar-plugin.tar.xz
-Source1068:     maven-parent-pom.tar.xz
-Source1069:     maven-plugin-testing.tar.xz
-Source1070:     maven-plugin-tools.tar.xz
-Source1071:     maven-remote-resources-plugin.tar.xz
-Source1072:     maven-resolver.tar.xz
-Source1073:     maven-resources-plugin.tar.xz
-Source1074:     maven-shared-incremental.tar.xz
-Source1075:     maven-shared-io.tar.xz
-Source1076:     maven-shared-utils.tar.xz
-Source1077:     maven-source-plugin.tar.xz
-Source1078:     maven-surefire.tar.xz
-Source1079:     maven-verifier.tar.xz
-Source1080:     maven-wagon.tar.xz
-Source1081:     maven.tar.xz
-Source1082:     mockito.tar.xz
-Source1083:     modello.tar.xz
-Source1084:     moditect.tar.xz
-Source1085:     modulemaker-maven-plugin.tar.xz
-Source1086:     mojo-parent-pom.tar.xz
-Source1087:     objenesis.tar.xz
-Source1088:     opentest4j.tar.xz
-Source1089:     osgi-annotation.tar.xz
-Source1090:     osgi-cmpn.tar.xz
-Source1091:     osgi-core.tar.xz
-Source1092:     plexus-archiver.tar.xz
-Source1093:     plexus-build-api.tar.xz
-Source1094:     plexus-cipher.tar.xz
-Source1095:     plexus-classworlds.tar.xz
-Source1096:     plexus-compiler.tar.xz
-Source1097:     plexus-components-pom.tar.xz
-Source1098:     plexus-containers.tar.xz
-Source1099:     plexus-interpolation.tar.xz
-Source1100:     plexus-io.tar.xz
-Source1101:     plexus-languages.tar.xz
-Source1102:     plexus-pom.tar.xz
-Source1103:     plexus-resources.tar.xz
-Source1104:     plexus-sec-dispatcher.tar.xz
-Source1105:     plexus-testing.tar.xz
-Source1106:     plexus-utils.tar.xz
-Source1107:     plexus-xml.tar.xz
-Source1108:     qdox.tar.xz
-Source1109:     servlet-api.tar.xz
-Source1110:     sisu-inject.tar.xz
-Source1111:     sisu-mojos.tar.xz
-Source1112:     sisu-plexus.tar.xz
-Source1113:     slf4j.tar.xz
-Source1114:     testng.tar.xz
-Source1115:     univocity-parsers.tar.xz
-Source1116:     velocity-engine.tar.xz
-Source1117:     xmlunit.tar.xz
-Source1118:     xmvn-generator.tar.xz
-Source1119:     xmvn.tar.xz
-Source1120:     xz-java.tar.xz
+Source1001:     ant.tar.zst
+Source1002:     aopalliance.tar.zst
+Source1003:     apache-pom.tar.zst
+Source1004:     apiguardian.tar.zst
+Source1005:     asm.tar.zst
+Source1006:     assertj-core.tar.zst
+Source1007:     bnd.tar.zst
+Source1008:     build-helper-maven-plugin.tar.zst
+Source1009:     byte-buddy.tar.zst
+Source1010:     cdi.tar.zst
+Source1011:     chhorz-javadoc-parser.tar.zst
+Source1012:     common-annotations-api.tar.zst
+Source1013:     commons-beanutils.tar.zst
+Source1014:     commons-cli.tar.zst
+Source1015:     commons-codec.tar.zst
+Source1016:     commons-collections.tar.zst
+Source1017:     commons-compress.tar.zst
+Source1018:     commons-io.tar.zst
+Source1019:     commons-jxpath.tar.zst
+Source1020:     commons-lang.tar.zst
+Source1021:     commons-logging.tar.zst
+Source1022:     commons-parent-pom.tar.zst
+Source1023:     cup.tar.zst
+Source1024:     disruptor.tar.zst
+Source1025:     dola-gleaner.tar.zst
+Source1026:     dola.tar.zst
+Source1027:     dola-transformer.tar.zst
+Source1028:     easymock.tar.zst
+Source1029:     felix-parent-pom.tar.zst
+Source1030:     felix-utils.tar.zst
+Source1031:     fusesource-pom.tar.zst
+Source1032:     gson.tar.zst
+Source1033:     guava.tar.zst
+Source1034:     guice.tar.zst
+Source1035:     hamcrest.tar.zst
+Source1036:     httpcomponents-client.tar.zst
+Source1037:     httpcomponents-core.tar.zst
+Source1038:     httpcomponents-parent-pom.tar.zst
+Source1039:     injection-api.tar.zst
+Source1040:     jaf-api.tar.zst
+Source1041:     jansi.tar.zst
+Source1042:     javacc-maven-plugin.tar.zst
+Source1043:     javacc.tar.zst
+Source1044:     javaparser.tar.zst
+Source1045:     jcommander.tar.zst
+Source1046:     jctools.tar.zst
+Source1047:     jdom2.tar.zst
+Source1048:     jdom.tar.zst
+Source1049:     jflex.tar.zst
+Source1050:     jline3.tar.zst
+Source1051:     jsoup.tar.zst
+Source1052:     jsr-305.tar.zst
+Source1053:     junit4.tar.zst
+Source1054:     junit5.tar.zst
+Source1055:     kojan-parent.tar.zst
+Source1056:     kojan-xml.tar.zst
+Source1057:     log4j.tar.zst
+Source1058:     mail-api.tar.zst
+Source1059:     maven4.tar.zst
+Source1060:     maven-antrun-plugin.tar.zst
+Source1061:     maven-apache-resources.tar.zst
+Source1062:     maven-archiver.tar.zst
+Source1063:     maven-artifact-transfer.tar.zst
+Source1064:     maven-assembly-plugin.tar.zst
+Source1065:     maven-bundle-plugin.tar.zst
+Source1066:     maven-common-artifact-filters.tar.zst
+Source1067:     maven-compiler-plugin.tar.zst
+Source1068:     maven-dependency-analyzer.tar.zst
+Source1069:     maven-dependency-plugin.tar.zst
+Source1070:     maven-dependency-tree.tar.zst
+Source1071:     maven-file-management.tar.zst
+Source1072:     maven-filtering.tar.zst
+Source1073:     maven-jar-plugin.tar.zst
+Source1074:     maven-parent-pom.tar.zst
+Source1075:     maven-plugin-testing.tar.zst
+Source1076:     maven-plugin-tools.tar.zst
+Source1077:     maven.tar.zst
+Source1078:     maven-remote-resources-plugin.tar.zst
+Source1079:     maven-resolver2.tar.zst
+Source1080:     maven-resolver.tar.zst
+Source1081:     maven-resources-plugin.tar.zst
+Source1082:     maven-shared-incremental.tar.zst
+Source1083:     maven-shared-io.tar.zst
+Source1084:     maven-shared-utils.tar.zst
+Source1085:     maven-source-plugin.tar.zst
+Source1086:     maven-surefire.tar.zst
+Source1087:     maven-verifier.tar.zst
+Source1088:     maven-wagon.tar.zst
+Source1089:     mockito.tar.zst
+Source1090:     modello.tar.zst
+Source1091:     moditect.tar.zst
+Source1092:     modulemaker-maven-plugin.tar.zst
+Source1093:     mojo-parent-pom.tar.zst
+Source1094:     objenesis.tar.zst
+Source1095:     opentest4j.tar.zst
+Source1096:     osgi-annotation.tar.zst
+Source1097:     osgi-cmpn.tar.zst
+Source1098:     osgi-core.tar.zst
+Source1099:     picocli.tar.zst
+Source1100:     plexus-archiver.tar.zst
+Source1101:     plexus-build-api0.tar.zst
+Source1102:     plexus-build-api.tar.zst
+Source1103:     plexus-cipher.tar.zst
+Source1104:     plexus-classworlds.tar.zst
+Source1105:     plexus-compiler.tar.zst
+Source1106:     plexus-containers.tar.zst
+Source1107:     plexus-interactivity.tar.zst
+Source1108:     plexus-interpolation.tar.zst
+Source1109:     plexus-io.tar.zst
+Source1110:     plexus-languages.tar.zst
+Source1111:     plexus-pom.tar.zst
+Source1112:     plexus-resources.tar.zst
+Source1113:     plexus-sec-dispatcher4.tar.zst
+Source1114:     plexus-sec-dispatcher.tar.zst
+Source1115:     plexus-testing.tar.zst
+Source1116:     plexus-utils4.tar.zst
+Source1117:     plexus-utils.tar.zst
+Source1118:     plexus-xml.tar.zst
+Source1119:     qdox.tar.zst
+Source1120:     servlet-api.tar.zst
+Source1121:     sisu.tar.zst
+Source1122:     slf4j2.tar.zst
+Source1123:     slf4j.tar.zst
+Source1124:     stax2-api.tar.zst
+Source1125:     testng.tar.zst
+Source1126:     univocity-parsers.tar.zst
+Source1127:     velocity-engine.tar.zst
+Source1128:     woodstox.tar.zst
+Source1129:     xmlunit.tar.zst
+Source1130:     xmvn.tar.zst
+Source1131:     xz-java.tar.zst
 
 BuildRequires:  byaccj
-BuildRequires:  gcc
+# For _javaconfdir macro
+BuildRequires:  javapackages-filesystem
 BuildRequires:  jdk-current
 BuildRequires:  jurand
-BuildRequires:  rpm-devel
-BuildRequires:  rpm-local-generator-support
-BuildRequires:  javapackages-filesystem
-
 Requires:       bash
 Requires:       coreutils
 Requires:       jdk-current
-Requires:       procps-ng
-Requires:       lujavrite%{?_isa}
-
 Requires:       javapackages-common
+Requires:       lujavrite
+Requires:       procps-ng
 
 %description
 In a nutshell, Java Packages Bootstrap (JPB) is a standalone build of all Java
@@ -198,36 +193,12 @@ example, JPB contains embedded version of XMvn, removing dependency of JPT on
 XMvn, allowing JPT to be used before one builds XMvn package.
 
 %prep
-%autosetup -p1
-# Fix hardcoded Java paths
-%if "%{javaHomePath}" != "/usr/lib/jvm/java-21"
-sed -i -e 's,/usr/lib/jvm/java-21,%{javaHomePath},g' mbi/core/src/org/fedoraproject/mbi/dist/DistCommand.java patches/maven/0002-Bind-to-OpenJDK-21-for-runtime.patch README.md mbi.sh
-%endif
-
-# Dynamically generate bundled Provides
-sh %{SOURCE2} >bundled-provides.txt
-
-# leave out the first source as it has already been extracted
-# leave out licensing breakdown file
-other_sources=$(echo %{sources} | cut -d' ' -f4-)
-
-for source in ${other_sources}; do
-  tar -xf "${source}"
-done
-
-for patch_path in patches/*/*; do
-  package_name="$(echo ${patch_path} | cut -f2 -d/)"
-  patch_name="$(echo ${patch_path} | cut -f3 -d/)"
-  
-  pushd "downstream/${package_name}"
-  # Unify line endings
-  find . -name '*.java' -exec sed -i 's/\r//' {} +
-  sed 's/\r//' "../../patches/${package_name}/${patch_name}" | patch -p1
-  popd
-done
+%autosetup -p1 -C
+mkdir archive/
+cp %{sources} archive/
+./downstream.sh prep-from-archive
 
 %build
-export LC_ALL=C.UTF-8
 JAVA_HOME=%{javaHomePath} ./mbi.sh build -parallel
 
 %install
@@ -241,36 +212,44 @@ JAVA_HOME=%{javaHomePath} ./mbi.sh dist \
   -launchersPath=%{launchersPath} \
   -licensesPath=%{_licensedir}/%{name} \
 
-install -D -p -m 644 downstream/xmvn-generator/src/main/lua/xmvn-generator.lua %{buildroot}%{_rpmluadir}/%{name}-generator.lua
-install -D -p -m 644 downstream/xmvn-generator/src/main/rpm/macros.xmvngen %{buildroot}%{_rpmmacrodir}/macros.jpbgen
-install -D -p -m 644 downstream/xmvn-generator/src/main/rpm/macros.xmvngenhook %{buildroot}%{_sysconfdir}/rpm/macros.jpbgenhook
-install -D -p -m 644 downstream/xmvn-generator/src/main/rpm/xmvngen.attr %{buildroot}%{_fileattrsdir}/jpbgen.attr
+install -D -p -m 644 downstream/dola/dola-bsx/src/main/lua/dola-bsx.lua %{buildroot}%{_rpmluadir}/%{name}-dola-bsx.lua
+install -D -p -m 644 downstream/dola/dola-dbs/src/main/lua/dola-dbs.lua %{buildroot}%{_rpmluadir}/%{name}-dola-dbs.lua
+install -D -p -m 644 downstream/dola/dola-generator/src/main/lua/dola-generator.lua %{buildroot}%{_rpmluadir}/%{name}-dola-generator.lua
+install -D -p -m 644 downstream/dola/dola-bsx/src/main/rpm/macros.dola-bsx %{buildroot}%{_rpmmacrodir}/macros.jpb-dola-bsx
+install -D -p -m 644 downstream/dola/dola-dbs/src/main/rpm/macros.dola-dbs %{buildroot}%{_rpmmacrodir}/macros.zzz-jpb-dola-dbs
+install -D -p -m 644 downstream/dola/dola-generator/src/main/rpm/macros.dola-generator %{buildroot}%{_rpmmacrodir}/macros.jpb-dola-generator
+install -D -p -m 644 downstream/dola/dola-generator/src/main/rpm/macros.dola-generator-etc %{buildroot}%{_sysconfdir}/rpm/macros.jpb-dola-generator-etc
+install -D -p -m 644 downstream/dola/dola-generator/src/main/rpm/dolagen.attr %{buildroot}%{_fileattrsdir}/jpbdolagen.attr
+install -D -p -m 644 downstream/dola/dola-bsx/src/main/conf/dola-bsx.conf %{buildroot}%{_javaconfdir}/%{name}/dola/classworlds/00-dola-bsx.conf
+install -D -p -m 644 downstream/dola/dola-dbs/src/main/conf/dola-dbs.conf %{buildroot}%{_javaconfdir}/%{name}/dola/classworlds/04-dola-dbs.conf
+install -D -p -m 644 downstream/dola/dola-generator/src/main/conf/dola-generator.conf %{buildroot}%{_javaconfdir}/%{name}/dola/classworlds/03-dola-generator.conf
+install -D -p -m 644 downstream/dola/dola-bsx-api/src/main/conf/dola-bsx-api.conf %{buildroot}%{_javaconfdir}/%{name}/dola/classworlds/02-dola-bsx-api.conf
 
 echo '
 %%__xmvngen_debug 1
 %%__xmvngen_libjvm %{javaHomePath}/lib/server/libjvm.so
-%%__xmvngen_classpath %{artifactsPath}/%{name}/xmvn-generator.jar:%{artifactsPath}/%{name}/asm.jar:%{artifactsPath}/%{name}/commons-compress.jar
-%%__xmvngen_provides_generators org.fedoraproject.xmvn.generator.jpms.JPMSGeneratorFactory
-%%__xmvngen_requires_generators %%{nil}
+%%__xmvngen_classpath %{artifactsPath}/%{name}/xmvn-generator.jar:%{artifactsPath}/%{name}/asm.jar:%{artifactsPath}/%{name}/commons-compress.jar:%{artifactsPath}/%{name}/commons-io.jar:%{artifactsPath}/%{name}/xmvn-mojo.jar:%{artifactsPath}/%{name}/kojan-xml.jar:%{artifactsPath}/%{name}/maven-model.jar:%{artifactsPath}/%{name}/plexus-utils.jar
+%%__xmvngen_provides_generators org.fedoraproject.xmvn.generator.filesystem.FilesystemGeneratorFactory org.fedoraproject.xmvn.generator.jpscript.JPackageScriptGeneratorFactory org.fedoraproject.xmvn.generator.jpms.JPMSGeneratorFactory org.fedoraproject.xmvn.generator.maven.MavenGeneratorFactory
+%%__xmvngen_requires_generators org.fedoraproject.xmvn.generator.filesystem.FilesystemGeneratorFactory org.fedoraproject.xmvn.generator.jpscript.JPackageScriptGeneratorFactory org.fedoraproject.xmvn.generator.maven.MavenGeneratorFactory
 %%__xmvngen_post_install_hooks org.fedoraproject.xmvn.generator.transformer.TransformerHookFactory
-%%jpb_env PATH=/usr/libexec/javapackages-bootstrap:$PATH
+%%jpb_env PATH=/usr/libexec/javapackages-bootstrap:%{javaHomePath}/bin:$PATH
+%%java_home %{javaHomePath}
 ' >%{buildroot}%{_rpmmacrodir}/macros.jpbgen
 
-sed -i s/xmvn-generator/%{name}-generator/ %{buildroot}%{_sysconfdir}/rpm/macros.jpbgenhook
-sed -i s/xmvn-generator/%{name}-generator/ %{buildroot}%{_fileattrsdir}/jpbgen.attr
-sed -i s/_xmvngen_/_jpbgen_/ %{buildroot}%{_fileattrsdir}/jpbgen.attr
+# Dynamically generate bundled Provides
+./downstream.sh bundled-provides >bundled-provides.txt
 
 %check
 %{buildroot}%{launchersPath}/xmvn --version
 
 %files
 %{mavenHomePath}
-%{artifactsPath}/*
 %{launchersPath}/*
 %{_rpmluadir}/*
 %{_rpmmacrodir}/*
 %{_fileattrsdir}/*
 %{_sysconfdir}/rpm/*
+%{_javaconfdir}/%{name}
 
 %license %{_licensedir}/%{name}
 %doc README.md

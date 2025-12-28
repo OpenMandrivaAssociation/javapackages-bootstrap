@@ -9,7 +9,7 @@
 #    build-helper-maven-plugin has license: MIT
 #    byte-buddy has license: Apache-2.0
 #    cdi has license: Apache-2.0
-#    cglib has license: Apache-2.0 AND BSD-3-Clause
+#    chhorz-javadoc-parser has license: Apache-2.0
 #    common-annotations-api has license: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 #    commons-beanutils has license: Apache-2.0
 #    commons-cli has license: Apache-2.0
@@ -23,11 +23,14 @@
 #    commons-parent-pom has license: Apache-2.0
 #    cup has license: SMLNJ
 #    disruptor has license: Apache-2.0
+#    dola has license: Apache-2.0
+#    dola-gleaner has license: Apache-2.0
+#    dola-transformer has license: Apache-2.0
 #    easymock has license: Apache-2.0
-#    extra-enforcer-rules has license: Apache-2.0
 #    felix-parent-pom has license: Apache-2.0
 #    felix-utils has license: Apache-2.0
 #    fusesource-pom has license: Apache-2.0
+#    gson has license: Apache-2.0
 #    guava has license: Apache-2.0 AND CC0-1.0
 #    guice has license: Apache-2.0
 #    hamcrest has license: BSD-3-Clause
@@ -45,10 +48,13 @@
 #    jdom has license: Saxpath
 #    jdom2 has license: Saxpath
 #    jflex has license: BSD-3-Clause
+#    jline3 has license: Apache-2.0 AND BSD-3-Clause
 #    jsoup has license: MIT
-#    jsr-305 has license: BSD-3-Clause AND CC-BY-2.5
+#    jsr-305 has license: BSD-3-Clause
 #    junit4 has license: EPL-1.0
 #    junit5 has license: EPL-2.0
+#    kojan-parent has license: Apache-2.0
+#    kojan-xml has license: Apache-2.0
 #    log4j has license: Apache-2.0
 #    mail-api has license: EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0
 #    maven has license: Apache-2.0 AND MIT
@@ -63,7 +69,6 @@
 #    maven-dependency-analyzer has license: Apache-2.0
 #    maven-dependency-plugin has license: Apache-2.0
 #    maven-dependency-tree has license: Apache-2.0
-#    maven-enforcer has license: Apache-2.0
 #    maven-file-management has license: Apache-2.0
 #    maven-filtering has license: Apache-2.0
 #    maven-jar-plugin has license: Apache-2.0
@@ -72,6 +77,7 @@
 #    maven-plugin-tools has license: Apache-2.0
 #    maven-remote-resources-plugin has license: Apache-2.0
 #    maven-resolver has license: Apache-2.0
+#    maven-resolver2 has license: Apache-2.0
 #    maven-resources-plugin has license: Apache-2.0
 #    maven-shared-incremental has license: Apache-2.0
 #    maven-shared-io has license: Apache-2.0
@@ -80,6 +86,7 @@
 #    maven-surefire has license: Apache-2.0 AND CPL-1.0
 #    maven-verifier has license: Apache-2.0
 #    maven-wagon has license: Apache-2.0
+#    maven4 has license: Apache-2.0
 #    mbi has license: Apache-2.0
 #    mockito has license: MIT
 #    modello has license: Apache-2.0 AND MIT AND Plexus
@@ -91,34 +98,38 @@
 #    osgi-annotation has license: Apache-2.0
 #    osgi-cmpn has license: Apache-2.0
 #    osgi-core has license: Apache-2.0
+#    picocli has license: Apache-2.0
 #    plexus-archiver has license: Apache-2.0
 #    plexus-build-api has license: Apache-2.0
+#    plexus-build-api0 has license: Apache-2.0
 #    plexus-cipher has license: Apache-2.0
 #    plexus-classworlds has license: Apache-2.0 AND Plexus
 #    plexus-compiler has license: Apache-2.0 AND MIT
-#    plexus-components-pom has license: Apache-2.0
 #    plexus-containers has license: Apache-2.0 AND MIT AND xpp
+#    plexus-interactivity has license: MIT
 #    plexus-interpolation has license: Apache-1.1 AND Apache-2.0 AND MIT
 #    plexus-io has license: Apache-2.0
 #    plexus-languages has license: Apache-2.0
 #    plexus-pom has license: Apache-2.0
 #    plexus-resources has license: Apache-2.0 AND MIT
 #    plexus-sec-dispatcher has license: Apache-2.0
+#    plexus-sec-dispatcher4 has license: Apache-2.0
 #    plexus-testing has license: Apache-2.0
 #    plexus-utils has license: Apache-1.1 AND Apache-2.0 AND BSD-3-Clause AND LicenseRef-Fedora-Public-Domain AND xpp
+#    plexus-utils4 has license: Apache-1.1 AND Apache-2.0 AND BSD-3-Clause AND LicenseRef-Fedora-Public-Domain
 #    plexus-xml has license: Apache-1.1 AND Apache-2.0 AND xpp
 #    qdox has license: Apache-2.0
 #    servlet-api has license: Apache-2.0 AND (EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0)
-#    sisu-inject has license: BSD-3-Clause AND EPL-1.0
-#    sisu-mojos has license: EPL-1.0
-#    sisu-plexus has license: BSD-3-Clause AND EPL-1.0
+#    sisu has license: BSD-3-Clause AND EPL-1.0
 #    slf4j has license: Apache-2.0 AND MIT
+#    slf4j2 has license: Apache-2.0 AND MIT
+#    stax2-api has license: BSD-2-Clause
 #    testng has license: Apache-2.0
 #    univocity-parsers has license: Apache-2.0
 #    velocity-engine has license: Apache-2.0
+#    woodstox has license: Apache-2.0
 #    xmlunit has license: Apache-2.0
 #    xmvn has license: Apache-2.0
-#    xmvn-generator has license: Apache-2.0
 #    xz-java has license: LicenseRef-Fedora-Public-Domain
 # Therefore combined license is:
-License:        Apache-1.1 AND Apache-2.0 AND (Apache-2.0 OR EPL-2.0) AND (Apache-2.0 OR LGPL-2.0-or-later) AND BSD-2-Clause AND BSD-3-Clause AND CC-BY-2.5 AND CC0-1.0 AND CPL-1.0 AND EPL-1.0 AND EPL-2.0 AND (EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0) AND LicenseRef-Fedora-Public-Domain AND MIT AND Plexus AND SMLNJ AND Saxpath AND xpp
+License:        Apache-1.1 AND Apache-2.0 AND (Apache-2.0 OR EPL-2.0) AND (Apache-2.0 OR LGPL-2.0-or-later) AND BSD-2-Clause AND BSD-3-Clause AND CC0-1.0 AND CPL-1.0 AND EPL-1.0 AND EPL-2.0 AND (EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0) AND LicenseRef-Fedora-Public-Domain AND MIT AND Plexus AND SMLNJ AND Saxpath AND xpp
